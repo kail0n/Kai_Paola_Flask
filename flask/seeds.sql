@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS trainers;
 
 CREATE TABLE trainers (
-    id serial PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     brand VARCHAR NOT NULL,
     country VARCHAR
 );

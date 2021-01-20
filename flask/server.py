@@ -1,6 +1,6 @@
 from flask import Flask, g, jsonify, request
 from flask_cors import CORS
-# from controllers import trainers
+from controllers import trainers
 from werkzeug import exceptions
 from db import get_db
 
@@ -17,8 +17,7 @@ def close_connection(exception):
 def init_db():
     with server.app_context():
         db = get_db()
-        with server.open_resource('se
-        eds.sql', mode='r') as f:
+        with server.open_resource('seeds.sql', mode='r') as f:
             db.cursor().executescript(f.read())
             for row in db.execute('SELECT * FROM trainers;'):
                 print(row)
@@ -55,7 +54,7 @@ def shoe_handler(trainers_id):
         # 'PUT': trainers.update,
         # 'DELETE': trainers.destroy
     }
-    resp, code = fns[request.method](request, trainer_id)
+    resp, code = fns[request.method](request, trainers_id)
     return jsonify(resp), code
 
 @server.errorhandler(exceptions.NotFound)
